@@ -10,6 +10,7 @@
   "scripts": {
     "build": "tsc",
     "example": "vite",
+    "release": "pnpm publish --access public --no-git-checks",
     "test": "vitest --workspace=vitest.workspace.ts",
     "test:ci": "vitest run --workspace=vitest.workspace.ts",
     "coverage": "vitest run --coverage"
