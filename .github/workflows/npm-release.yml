@@ -36,12 +36,6 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Update Git user.name
-        run: git config --global user.name ${{ secrets.GIT_USER }}
-
-      - name: Update Git user.email
-        run: git config --global user.email ${{ secrets.GIT_EMAIL }}
-
       - name: Update Version
         run: pnpm version ${{ github.event.release.tag_name }} --no-git-tag-version
 
