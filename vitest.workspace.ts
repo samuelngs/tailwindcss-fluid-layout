@@ -4,7 +4,7 @@ export default defineWorkspace([
   {
     extends: 'vite.config.ts',
     test: {
-      include: ['src/**/*.{test,spec}.{ts,tsx}'],
+      include: ['**/*.{test,spec}.{ts,tsx}'],
       browser: {
         enabled: true,
         name: 'chromium',
