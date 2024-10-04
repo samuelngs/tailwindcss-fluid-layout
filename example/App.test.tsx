@@ -1,7 +1,7 @@
 import { page } from '@vitest/browser/context';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
-import App from './App.js';
+import App from './App';
 
 test('renders fluid grid layout', async () => {
   const app = render(<App />);
