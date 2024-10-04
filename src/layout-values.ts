@@ -1,15 +1,17 @@
 import { PluginAPI } from 'tailwindcss/types/config';
 import { n } from './helpers/css-unit';
 import { prettyErrors } from './helpers/error';
-import { config, Config, Layout } from './schema';
+import { getOptions } from './options';
+import { config, Config, Layout, PluginOptions } from './schema';
 
 export function getTailwindLayoutValues(
   api: PluginAPI,
-  path: string
+  params?: PluginOptions
 ): Layout[] {
-  try {
-    const values = config.parse(api.theme(path) ?? {});
+  const opts = getOptions(params);
 
+  try {
+    const values = config.parse(api.theme(opts.path) ?? {});
     return Object.entries(values).reduce<Layout[]>(
       (acc, [name, { sizes, padding }]) => {
         return acc.concat({
@@ -21,8 +23,12 @@ export function getTailwindLayoutValues(
       []
     );
   } catch (err) {
-    prettyErrors(path, err);
-    return [];
+    if (opts.throwOnError) {
+      throw err;
+    } else {
+      prettyErrors(opts.path!, err);
+      return [];
+    }
   }
 }
 
