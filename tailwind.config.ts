@@ -1,22 +1,24 @@
 import type { Config } from 'tailwindcss';
-import { fluidGrid } from './src';
+import tailwindFluidGrid from './src';
 
 const config: Config = {
   content: ['./src/**/*.tsx'],
-  plugins: [
-    fluidGrid(
-      [
-        { name: 'compact', size: '400px' },
-        { name: 'content', size: '800px' },
-        { name: 'popout', size: '1200px' },
-        { name: 'feature', size: '1400px' },
-      ],
-      {
-        name: 'main',
-        padding: '16px',
-      }
-    ),
-  ],
+  plugins: [tailwindFluidGrid],
+  theme: {
+    extend: {
+      layouts: {
+        main: {
+          padding: '16px',
+          sizes: {
+            compact: '400px',
+            content: '800px',
+            popout: '1200px',
+            feature: '1400px',
+          },
+        },
+      },
+    },
+  },
 };
 
 export default config;

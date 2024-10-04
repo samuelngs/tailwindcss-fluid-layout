@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
     "target": "es2016",
     "module": "commonjs",
     "lib": ["DOM", "DOM.Iterable"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "declaration": true,
     "skipLibCheck": true,
     "outDir": "dist",
     "jsx": "preserve",
@@ -14,5 +14,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "types": ["@vitest/browser/providers/playwright"]
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
