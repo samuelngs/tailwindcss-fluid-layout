@@ -1,19 +1,10 @@
-import plugin from 'tailwindcss/plugin';
-import { gridStyles, layoutStyles } from './generator';
-import { CSSUnit, GridLayoutOptions, GridLayoutSizes, Size } from './types';
-import { sortSizes } from './utils';
-import { validateSizes } from './validators';
+import createPlugin from 'tailwindcss/plugin';
+import { generateGridStyles, generateLayoutStyles } from './generator';
+import { getTailwindLayoutValues } from './layout-values';
 
-export function fluidGrid<T extends Size<CSSUnit>>(
-  sizes: GridLayoutSizes<T>,
-  opts: GridLayoutOptions
-): ReturnType<typeof plugin> {
-  return plugin(function ({ addUtilities }) {
-    validateSizes(sizes);
+export default createPlugin((api) => {
+  const layouts = getTailwindLayoutValues(api, 'layouts');
 
-    const sortedSizes = sortSizes(sizes);
-
-    addUtilities(layoutStyles('tw', sortedSizes, opts));
-    addUtilities(gridStyles(sortedSizes));
-  });
-}
+  api.addUtilities(generateLayoutStyles(layouts));
+  api.addUtilities(generateGridStyles(layouts));
+});

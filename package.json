@@ -1,25 +1,21 @@
 {
   "name": "tailwindcss-fluid-layout",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
   "license": "MIT",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": "./src/index.ts"
-  },
   "scripts": {
-    "build": "tsc src/index.ts",
-    "preview": "vite",
-    "release": "pnpm run np",
+    "build": "tsc",
+    "example": "vite",
     "test": "vitest --workspace=vitest.workspace.ts",
     "test:ci": "vitest run --workspace=vitest.workspace.ts",
     "coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@types/react": "^18.3.10",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
     "@vitest/browser": "^2.1.1",
@@ -43,5 +39,8 @@
   "keywords": [
     "tailwindcss",
     "fluid-grid"
-  ]
+  ],
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
 }

@@ -1,87 +1,30 @@
 import { CSSRuleObject } from 'tailwindcss/types/config';
-import {
-  CSSUnit,
-  GridLayoutOptions,
-  GridLayoutSize,
-  GridLayoutSizes,
-  Size,
-} from './types';
+import { Layout, Size } from './schema';
 
-export function layoutStyles<T extends Size<CSSUnit>>(
-  prefix: string,
-  sizes: GridLayoutSizes<T>,
-  { name, padding }: GridLayoutOptions
-): CSSRuleObject {
-  const template = gridContainerTemplate(prefix, sizes);
-  const variables = sizes.reduce(
-    (acc, { name, size }, i) => ({
+export function generateLayoutStyles(layouts: Layout[]): CSSRuleObject {
+  return layouts.reduce<CSSRuleObject>((acc, { name, sizes, padding }) => {
+    const template = generateGridTemplate(sizes);
+    const variables = generateGridVariables(sizes, padding);
+
+    return {
       ...acc,
-      [`--${prefix}-layout-${name}-size`]: size,
-      [`--${prefix}-layout-${name}-gutter`]: gridContainerGutter(
-        prefix,
-        i,
-        name,
-        sizes
-      ),
-    }),
-    {
-      [`--${prefix}-layout-full-size`]: '100%',
-      [`--${prefix}-layout-padding`]: padding ?? `0px`,
-      [`--${prefix}-layout-size`]: `var(--${prefix}-layout-full-size) - (var(--${prefix}-layout-padding) * 2)`,
-    }
-  );
-
-  return {
-    [`.grid-cols-${name}`]: {
-      ...variables,
-      display: 'grid',
-      gridTemplateColumns: template,
-    },
-    [`.grid-rows-${name}`]: {
-      ...variables,
-      display: 'grid',
-      gridTemplateRows: template,
-    },
-  };
+      [`.grid-cols-${name}`]: {
+        ...variables,
+        display: 'grid',
+        gridTemplateColumns: template,
+      },
+      [`.grid-rows-${name}`]: {
+        ...variables,
+        display: 'grid',
+        gridTemplateRows: template,
+      },
+    };
+  }, {});
 }
 
-export function gridStyles<T extends Size<CSSUnit>>(
-  sizes: GridLayoutSizes<T>
-): CSSRuleObject {
-  return sizes.reduce(
-    (acc, { name }) => ({
-      [`.col-${name}`]: {
-        gridColumn: name,
-      },
-      [`.row-${name}`]: {
-        gridRow: name,
-      },
-      [`.col-start-${name}`]: {
-        gridColumnStart: name,
-      },
-      [`.col-start-${name}-end`]: {
-        gridColumnStart: `${name}-end`,
-      },
-      [`.col-end-${name}`]: {
-        gridColumnEnd: name,
-      },
-      [`.col-end-${name}-start`]: {
-        gridColumnEnd: `${name}-start`,
-      },
-      [`.row-start-${name}`]: {
-        gridRowStart: name,
-      },
-      [`.row-start-${name}-end`]: {
-        gridRowStart: `${name}-end`,
-      },
-      [`.row-end-${name}`]: {
-        gridRowEnd: name,
-      },
-      [`.row-end-${name}-start`]: {
-        gridRowEnd: `${name}-start`,
-      },
-      ...acc,
-    }),
+export function generateGridStyles(layouts: Layout[]): CSSRuleObject {
+  return layouts.reduce<CSSRuleObject>(
+    (acc, { sizes }) => ({ ...generateGridLayoutStyles(sizes), ...acc }),
     {
       '.col-full': {
         gridColumn: 'full',
@@ -117,40 +60,88 @@ export function gridStyles<T extends Size<CSSUnit>>(
   );
 }
 
-function gridContainerGutter<T extends Size<CSSUnit>>(
-  prefix: string,
+function gridLayoutGutter(
   i: number,
   name: string,
-  sizes: GridLayoutSizes<T>
+  sizes: Layout['sizes']
 ): string {
   const nextSize = sizes[i + 1];
 
   return nextSize
-    ? `calc((min(var(--${prefix}-layout-size), var(--${prefix}-layout-${name}-size)) - var(--${prefix}-layout-${nextSize.name}-size)) / 2)`
+    ? `calc((min(var(--tw-layout-size), var(--tw-layout-${name}-size)) - var(--tw-layout-${nextSize.name}-size)) / 2)`
     : '0';
 }
 
-function gridContainerTemplate<T extends Size<CSSUnit>>(
-  prefix: string,
-  sizes: GridLayoutSizes<T>
-): string {
-  const reducer = gridContainerTemplateReducer(prefix);
-  const inner = sizes.concat().reverse().reduce(reducer, '');
+function generateGridLayoutStyles(sizes: Layout['sizes']): CSSRuleObject {
+  return sizes.reduce(
+    (acc, { name }) => ({
+      [`.col-${name}`]: {
+        gridColumn: name,
+      },
+      [`.row-${name}`]: {
+        gridRow: name,
+      },
+      [`.col-start-${name}`]: {
+        gridColumnStart: name,
+      },
+      [`.col-start-${name}-end`]: {
+        gridColumnStart: `${name}-end`,
+      },
+      [`.col-end-${name}`]: {
+        gridColumnEnd: name,
+      },
+      [`.col-end-${name}-start`]: {
+        gridColumnEnd: `${name}-start`,
+      },
+      [`.row-start-${name}`]: {
+        gridRowStart: name,
+      },
+      [`.row-start-${name}-end`]: {
+        gridRowStart: `${name}-end`,
+      },
+      [`.row-end-${name}`]: {
+        gridRowEnd: name,
+      },
+      [`.row-end-${name}-start`]: {
+        gridRowEnd: `${name}-start`,
+      },
+      ...acc,
+    }),
+    {}
+  );
+}
 
-  const space = `minmax(var(--${prefix}-layout-padding), 1fr)`;
+function generateGridTemplate(sizes: Layout['sizes']): string {
+  const inner = sizes
+    .concat()
+    .reverse()
+    .reduce((acc: string, { name }: Layout['sizes'][number]) => {
+      if (!acc) {
+        return `[${name}-start] min(var(--tw-layout-size), var(--tw-layout-${name}-size)) [${name}-end]`;
+      }
+
+      const space = `minmax(0, var(--tw-layout-${name}-gutter))`;
+      return `[${name}-start] ${space} ${acc} ${space} [${name}-end]`;
+    }, '');
+
+  const space = `minmax(var(--tw-layout-padding), 1fr)`;
   return `[full-start] ${space} ${inner} ${space} [full-end]`;
 }
 
-function gridContainerTemplateReducer(prefix: string) {
-  return function reducer(
-    previous: string,
-    { name }: GridLayoutSize<CSSUnit>
-  ): string {
-    if (!previous) {
-      return `[${name}-start] min(var(--${prefix}-layout-size), var(--${prefix}-layout-${name}-size)) [${name}-end]`;
+function generateGridVariables(
+  sizes: Layout['sizes'],
+  padding?: Size
+): CSSRuleObject {
+  return sizes.reduce(
+    (acc, { name, size }, i) => ({
+      ...acc,
+      [`--tw-layout-${name}-size`]: size,
+      [`--tw-layout-${name}-gutter`]: gridLayoutGutter(i, name, sizes),
+    }),
+    {
+      [`--tw-layout-full-size`]: '100%',
+      [`--tw-layout-padding`]: padding ?? `0px`,
+      [`--tw-layout-size`]: `var(--tw-layout-full-size) - (var(--tw-layout-padding) * 2)`,
     }
-
-    const space = `minmax(0, var(--${prefix}-layout-${name}-gutter))`;
-    return `[${name}-start] ${space} ${previous} ${space} [${name}-end]`;
-  };
+  );
 }
