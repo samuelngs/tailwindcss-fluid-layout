@@ -24,7 +24,7 @@ export function generateLayoutStyles(layouts: Layout[]): CSSRuleObject {
 
 export function generateGridStyles(layouts: Layout[]): CSSRuleObject {
   return layouts.reduce<CSSRuleObject>(
-    (acc, { sizes }) => ({ ...generateGridLayoutStyles(sizes), ...acc }),
+    (acc, { sizes }) => ({ ...acc, ...generateGridLayoutStyles(sizes) }),
     {
       '.col-full': {
         gridColumn: 'full',
@@ -32,28 +32,28 @@ export function generateGridStyles(layouts: Layout[]): CSSRuleObject {
       '.row-full': {
         gridRow: 'full',
       },
-      ['.col-start-full']: {
+      '.col-start-full': {
         gridColumnStart: 'full',
       },
-      ['.col-start-full-end']: {
+      '.col-start-full-end': {
         gridColumnStart: 'full-end',
       },
-      ['.col-end-full']: {
+      '.col-end-full': {
         gridColumnEnd: 'full',
       },
-      ['.col-end-full-start']: {
+      '.col-end-full-start': {
         gridColumnEnd: 'full-start',
       },
-      ['.row-start-full']: {
+      '.row-start-full': {
         gridRowStart: 'full',
       },
-      ['.row-start-full-end']: {
+      '.row-start-full-end': {
         gridRowStart: 'full-end',
       },
-      ['.row-end-full']: {
+      '.row-end-full': {
         gridRowEnd: 'full',
       },
-      ['.row-end-full-start']: {
+      '.row-end-full-start': {
         gridRowEnd: 'full-start',
       },
     }
