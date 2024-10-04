@@ -52,13 +52,13 @@ Now, set an element as a container using `grid-cols-{name}` for a column-based l
 
 ```html
 <div class="grid-cols-main">
-  <div class="cols-full">
+  <div class="col-full">
     <!-- The `full` size is automatically configured for you and set to 100% to fit within the main layout. Please note that this area will ignore any padding settings and will always match the size of the parent layout. -->
   </div>
-  <div class="cols-content">
+  <div class="col-content">
     <!-- This element will be sized at `800px` or less to fit within the parent layout. -->
   </div>
-  <div class="cols-popout">
+  <div class="col-popout">
     <!-- This element will be sized at `1200px` or less to fit within the parent layout. -->
   </div>
 </div>
