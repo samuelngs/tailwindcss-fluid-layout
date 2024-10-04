@@ -37,7 +37,7 @@ jobs:
         run: pnpm build
 
       - name: Update Version
-        run: pnpm version ${{ github.ref }}
+        run: pnpm version ${{ github.event.release.tag_name }}
 
       - name: Publish 🚀
         shell: bash
