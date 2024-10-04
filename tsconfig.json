@@ -15,6 +15,6 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["@vitest/browser/providers/playwright"]
   },
-  "include": ["src", "example"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
