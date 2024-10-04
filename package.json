@@ -42,5 +42,6 @@
   ],
   "dependencies": {
     "zod": "^3.23.8"
-  }
+  },
+  "version": "0.1.0-alpha.4"
 }
