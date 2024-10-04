@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-fluid-layout",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "private": false,
   "license": "MIT",
   "main": "dist/index.js",
