@@ -36,6 +36,9 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Update Version
+        run: pnpm version ${{ github.event.release.tag_name }} --no-git-tag-version
+
       - name: Publish 🚀
         shell: bash
         run: pnpm publish --access public --no-git-checks
