@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss';
 import tailwindFluidGrid from './src';
 
 const config: Config = {
-  content: ['./src/**/*.tsx'],
+  content: ['./example/**/*.tsx'],
   plugins: [tailwindFluidGrid],
   theme: {
     extend: {
