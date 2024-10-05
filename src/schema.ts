@@ -39,7 +39,13 @@ export const layout = z.object({
   padding: size.optional(),
 });
 
+export const pluginOptions = z.object({
+  path: z.string().optional(),
+  throwOnError: z.boolean().optional(),
+});
+
 export type CSSUnit = z.infer<typeof cssUnit>;
 export type Size = z.infer<typeof size>;
 export type Config = z.infer<typeof config>;
 export type Layout = z.infer<typeof layout>;
+export type PluginOptions = z.infer<typeof pluginOptions>;
