@@ -13,7 +13,6 @@ npm install tailwindcss-fluid-layout
 Then, add the plugin to your `tailwind.config.js` file:
 
 ```javascript
-// tailwind.config.js
 module.exports = {
   theme: {
     // ...
@@ -30,7 +29,6 @@ module.exports = {
 Start by defining your layout(s) with the desired sizes in the `tailwind.config.js` file:
 
 ```javascript
-// tailwind.config.js
 module.exports = {
   theme: {
     layouts: {
@@ -38,11 +36,11 @@ module.exports = {
         sizes: {
           content: '800px',
           popout: '1200px',
-          // Add as many sizes as you like! You can also mix in other CSS units like em, %, and more to keep your layouts super flexible.
+          // Add as many sizes as you like! You can also use other CSS units like em, %, and more to keep your layouts super flexible.
         },
         padding: '16px', // optional
       },
-      // You can add as many grid layouts as you like! The key you define will be used as the name of the grid template.
+      // You can create multiple grid layouts, with each key you define serving as the name for its respective grid template.
     },
   },
 };
@@ -77,6 +75,25 @@ If you would like to position an element to start and end at different grid area
 </div>
 ```
 
+## Additional Options
+
+The `tailwindcss-fluid-layout` plugin comes with optional parameters that allow for further customization. When initializing the plugin, you can pass in an object to set various options. For example:
+
+```javascript
+require('tailwindcss-fluid-layout')({
+  path: 'layouts',
+  throwOnError: false,
+});
+```
+
+### Options Explained:
+
+- **`path`** (default: `layouts`):  
+  This option lets you specify a custom path for your layout configurations. By default, the plugin looks for layout values under `layouts` in the `tailwind.config.js` file, but you can rename this path to whatever you prefer.
+
+- **`throwOnError`** (default: `false`):  
+  When set to `true`, this option makes the plugin throw an error if there are any issues with the layout configurations. If you'd prefer the plugin to ignore configuration errors and continue building, you can set this option to `false`.
+
 ## Limitations
 
-- Due to CSS restrictions, it requires all size values within the same layout to be length literals and to use the same unit.
+- Currently, all size values within the same layout must be length literals and use the same unit.
