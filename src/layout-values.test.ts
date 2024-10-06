@@ -1,9 +1,10 @@
+import { CustomThemeConfig } from 'tailwindcss/types/config';
 import { expect, test } from 'vitest';
 import { createTailwindMockApi } from './helpers/mock';
 import { getTailwindLayoutValues } from './layout-values';
-import { Layout } from './schema';
+import type { Layout } from './schema';
 
-function getValues(theme: Record<string, any>): Layout[] {
+function getValues(theme: Partial<CustomThemeConfig>): Layout[] {
   const mockApi = createTailwindMockApi(theme);
   return getTailwindLayoutValues(mockApi, { throwOnError: true });
 }

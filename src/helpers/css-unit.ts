@@ -29,7 +29,7 @@ export function n(input: string): number {
   }
 
   const num = Number(res[0]);
-  if (isNaN(num)) {
+  if (Number.isNaN(num)) {
     throw new Error(`unable to read size of ${input}`);
   }
   return num;

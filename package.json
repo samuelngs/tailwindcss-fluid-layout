@@ -10,15 +10,19 @@
   "scripts": {
     "build": "tsc",
     "example": "vite",
+    "example:build": "vite build",
     "release": "pnpm publish --access public --no-git-checks",
-    "test": "vitest --workspace=vitest.workspace.ts",
-    "test:ci": "vitest run --workspace=vitest.workspace.ts",
-    "coverage": "vitest run --coverage"
+    "test": "vitest",
+    "test:ci": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "biome check",
+    "lint:fix": "biome check --write"
   },
   "dependencies": {
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.3",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
@@ -31,7 +35,6 @@
     "react-dom": "^18.3.1",
     "react-use": "^17.5.1",
     "tailwindcss": "^3.4.6",
-    "tsx": "^4.19.1",
     "typescript": "^5.6.2",
     "vite": "^5.4.8",
     "vitest": "^2.1.1",
@@ -41,7 +44,12 @@
     "tailwindcss": ">=3.4.6"
   },
   "keywords": [
+    "tailwind",
     "tailwindcss",
-    "fluid-grid"
+    "tailwindcss-plugin",
+    "tailwindcss-fluid-layout",
+    "fluid-grid",
+    "fluid-layout",
+    "fluid-breakout-layout"
   ]
 }

@@ -9,7 +9,7 @@ export const size = z.custom<`${number}${CSSUnit}`>(
   },
   {
     message: 'Invalid CSS unit',
-  }
+  },
 );
 
 export const config = z.record(
@@ -22,10 +22,10 @@ export const config = z.record(
       },
       {
         message: 'Inconsistent CSS units',
-      }
+      },
     ),
     padding: size.optional(),
-  })
+  }),
 );
 
 export const layout = z.object({
@@ -34,7 +34,7 @@ export const layout = z.object({
     z.object({
       name: z.string(),
       size,
-    })
+    }),
   ),
   padding: size.optional(),
 });

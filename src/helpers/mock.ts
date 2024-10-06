@@ -1,17 +1,22 @@
-import { CSSRuleObject, PluginAPI } from 'tailwindcss/types/config';
+import type {
+  CSSRuleObject,
+  CustomThemeConfig,
+  PluginAPI,
+} from 'tailwindcss/types/config';
+import { css } from './css-composer';
 
 interface MockPluginAPI extends PluginAPI {
   output(): CSSRuleObject;
 }
 
 export function createTailwindMockApi(
-  theme: Record<string, any>
+  theme: Partial<CustomThemeConfig>,
 ): MockPluginAPI {
-  let css = {};
+  let styles: CSSRuleObject = {};
 
   return {
     addUtilities(objs: CSSRuleObject | CSSRuleObject[]) {
-      css = { ...css, ...merge(objs) };
+      styles = css(styles, merge(objs));
     },
     matchUtilities() {
       throw new Error('Function not implemented.');
@@ -44,7 +49,7 @@ export function createTailwindMockApi(
       return className;
     },
     output() {
-      return css;
+      return styles;
     },
   };
 }
@@ -52,5 +57,5 @@ export function createTailwindMockApi(
 function merge(objs: CSSRuleObject | CSSRuleObject[]): CSSRuleObject {
   return ([] as CSSRuleObject[])
     .concat(objs)
-    .reduce<CSSRuleObject>((acc, obj) => ({ ...acc, ...obj }), {});
+    .reduce<CSSRuleObject>((acc, obj) => css(acc, obj), {});
 }

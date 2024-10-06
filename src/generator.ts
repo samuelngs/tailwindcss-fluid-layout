@@ -1,13 +1,13 @@
-import { CSSRuleObject } from 'tailwindcss/types/config';
-import { Layout, Size } from './schema';
+import type { CSSRuleObject } from 'tailwindcss/types/config';
+import { css } from './helpers/css-composer';
+import type { Layout, Size } from './schema';
 
 export function generateLayoutStyles(layouts: Layout[]): CSSRuleObject {
   return layouts.reduce<CSSRuleObject>((acc, { name, sizes, padding }) => {
     const template = generateGridTemplate(sizes);
     const variables = generateGridVariables(sizes, padding);
 
-    return {
-      ...acc,
+    return css(acc, {
       [`.grid-cols-${name}`]: {
         ...variables,
         display: 'grid',
@@ -18,13 +18,13 @@ export function generateLayoutStyles(layouts: Layout[]): CSSRuleObject {
         display: 'grid',
         gridTemplateRows: template,
       },
-    };
+    });
   }, {});
 }
 
 export function generateGridStyles(layouts: Layout[]): CSSRuleObject {
   return layouts.reduce<CSSRuleObject>(
-    (acc, { sizes }) => ({ ...acc, ...generateGridLayoutStyles(sizes) }),
+    (acc, { sizes }) => css(acc, generateGridLayoutStyles(sizes)),
     {
       '.col-full': {
         gridColumn: 'full',
@@ -56,14 +56,14 @@ export function generateGridStyles(layouts: Layout[]): CSSRuleObject {
       '.row-end-full-start': {
         gridRowEnd: 'full-start',
       },
-    }
+    },
   );
 }
 
 function gridLayoutGutter(
   i: number,
   name: string,
-  sizes: Layout['sizes']
+  sizes: Layout['sizes'],
 ): string {
   const nextSize = sizes[i + 1];
 
@@ -74,40 +74,40 @@ function gridLayoutGutter(
 
 function generateGridLayoutStyles(sizes: Layout['sizes']): CSSRuleObject {
   return sizes.reduce(
-    (acc, { name }) => ({
-      [`.col-${name}`]: {
-        gridColumn: name,
-      },
-      [`.row-${name}`]: {
-        gridRow: name,
-      },
-      [`.col-start-${name}`]: {
-        gridColumnStart: name,
-      },
-      [`.col-start-${name}-end`]: {
-        gridColumnStart: `${name}-end`,
-      },
-      [`.col-end-${name}`]: {
-        gridColumnEnd: name,
-      },
-      [`.col-end-${name}-start`]: {
-        gridColumnEnd: `${name}-start`,
-      },
-      [`.row-start-${name}`]: {
-        gridRowStart: name,
-      },
-      [`.row-start-${name}-end`]: {
-        gridRowStart: `${name}-end`,
-      },
-      [`.row-end-${name}`]: {
-        gridRowEnd: name,
-      },
-      [`.row-end-${name}-start`]: {
-        gridRowEnd: `${name}-start`,
-      },
-      ...acc,
-    }),
-    {}
+    (acc, { name }) =>
+      css(acc, {
+        [`.col-${name}`]: {
+          gridColumn: name,
+        },
+        [`.row-${name}`]: {
+          gridRow: name,
+        },
+        [`.col-start-${name}`]: {
+          gridColumnStart: name,
+        },
+        [`.col-start-${name}-end`]: {
+          gridColumnStart: `${name}-end`,
+        },
+        [`.col-end-${name}`]: {
+          gridColumnEnd: name,
+        },
+        [`.col-end-${name}-start`]: {
+          gridColumnEnd: `${name}-start`,
+        },
+        [`.row-start-${name}`]: {
+          gridRowStart: name,
+        },
+        [`.row-start-${name}-end`]: {
+          gridRowStart: `${name}-end`,
+        },
+        [`.row-end-${name}`]: {
+          gridRowEnd: name,
+        },
+        [`.row-end-${name}-start`]: {
+          gridRowEnd: `${name}-start`,
+        },
+      }),
+    {},
   );
 }
 
@@ -124,24 +124,25 @@ function generateGridTemplate(sizes: Layout['sizes']): string {
       return `[${name}-start] ${space} ${acc} ${space} [${name}-end]`;
     }, '');
 
-  const space = `minmax(var(--tw-layout-padding), 1fr)`;
+  const space = 'minmax(var(--tw-layout-padding), 1fr)';
   return `[full-start] ${space} ${inner} ${space} [full-end]`;
 }
 
 function generateGridVariables(
   sizes: Layout['sizes'],
-  padding?: Size
+  padding?: Size,
 ): CSSRuleObject {
-  return sizes.reduce(
-    (acc, { name, size }, i) => ({
-      ...acc,
-      [`--tw-layout-${name}-size`]: size,
-      [`--tw-layout-${name}-gutter`]: gridLayoutGutter(i, name, sizes),
-    }),
+  return sizes.reduce<CSSRuleObject>(
+    (acc, { name, size }, i) =>
+      css(acc, {
+        [`--tw-layout-${name}-size`]: size,
+        [`--tw-layout-${name}-gutter`]: gridLayoutGutter(i, name, sizes),
+      }),
     {
-      [`--tw-layout-full-size`]: '100%',
-      [`--tw-layout-padding`]: padding ?? `0px`,
-      [`--tw-layout-size`]: `var(--tw-layout-full-size) - (var(--tw-layout-padding) * 2)`,
-    }
+      '--tw-layout-full-size': '100%',
+      '--tw-layout-padding': padding ?? '0px',
+      '--tw-layout-size':
+        'var(--tw-layout-full-size) - (var(--tw-layout-padding) * 2)',
+    },
   );
 }

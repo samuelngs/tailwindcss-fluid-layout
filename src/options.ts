@@ -1,4 +1,4 @@
-import { PluginOptions } from './schema';
+import type { PluginOptions } from './schema';
 
 export const DEFAULT_PATH = 'layouts';
 export const DEFAULT_THROW_ON_ERROR = false;
