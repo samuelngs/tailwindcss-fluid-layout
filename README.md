@@ -92,7 +92,7 @@ require('tailwindcss-fluid-layout')({
   This option lets you specify a custom path for your layout configurations. By default, the plugin looks for layout values under `layouts` in the `tailwind.config.js` file, but you can rename this path to whatever you prefer.
 
 - **`throwOnError`** (default: `false`):  
-  When set to `true`, this option makes the plugin throw an error if there are any issues with the layout configurations. If you'd prefer the plugin to ignore configuration errors and continue building, you can set this option to `false`.
+  When set to `false`, this option prevents the plugin from throwing an error if there are any issues with the layout configurations. If you'd prefer the plugin to throw errors for easier debugging, you can set this option to `true`
 
 ## Limitations
 
