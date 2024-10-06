@@ -1,0 +1,44 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "files": {
+    "ignore": [
+      ".DS_Store",
+      "node_modules",
+      "coverage",
+      "vite.config.ts",
+      "dist",
+      "./**/*.d.ts",
+      "./**/*.test.ts",
+      "./**/*.json"
+    ]
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "formatter": {
+    "indentWidth": 2,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "off"
+      }
+    }
+  }
+}
