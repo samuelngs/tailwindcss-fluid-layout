@@ -29,7 +29,7 @@ importers:
         version: 2.1.1(@vitest/spy@2.1.1)(playwright@1.47.2)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1)
       '@vitest/coverage-v8':
         specifier: ^2.1.1
-        version: 2.1.1(@vitest/browser@2.1.1(@vitest/spy@2.1.1)(playwright@1.47.2)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1))(vitest@2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.6.2)))
+        version: 2.1.1(@vitest/browser@2.1.1)(vitest@2.1.1)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -62,7 +62,7 @@ importers:
         version: 2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.6.2))
       vitest-browser-react:
         specifier: ^0.0.1
-        version: 0.0.1(@types/react-dom@18.3.1)(@types/react@18.3.11)(@vitest/browser@2.1.1(@vitest/spy@2.1.1)(playwright@1.47.2)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.6.2)))
+        version: 0.0.1(@types/react-dom@18.3.1)(@types/react@18.3.11)(@vitest/browser@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@2.1.1)
 
 packages:
 
@@ -787,8 +787,8 @@ packages:
   copy-to-clipboard@3.3.3:
     resolution: {integrity: sha512-2KV8NhB5JqC3ky0r9PMCAZKbUHSwtEo4CwCs0KXgruG43gX5PMqDEBbVU4OUzw2MuAWUfsuFmWvEKG5QRfSnJA==}
 
-  cross-spawn@7.0.3:
-    resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
+  cross-spawn@7.0.6:
+    resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
 
   css-in-js-utils@3.1.0:
@@ -2169,7 +2169,7 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/coverage-v8@2.1.1(@vitest/browser@2.1.1(@vitest/spy@2.1.1)(playwright@1.47.2)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1))(vitest@2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.6.2)))':
+  '@vitest/coverage-v8@2.1.1(@vitest/browser@2.1.1)(vitest@2.1.1)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -2365,7 +2365,7 @@ snapshots:
     dependencies:
       toggle-selection: 1.0.6
 
-  cross-spawn@7.0.3:
+  cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
       shebang-command: 2.0.0
@@ -2468,7 +2468,7 @@ snapshots:
 
   foreground-child@3.2.1:
     dependencies:
-      cross-spawn: 7.0.3
+      cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
   fraction.js@4.3.7: {}
@@ -3101,7 +3101,7 @@ snapshots:
       '@types/node': 22.7.2
       fsevents: 2.3.3
 
-  vitest-browser-react@0.0.1(@types/react-dom@18.3.1)(@types/react@18.3.11)(@vitest/browser@2.1.1(@vitest/spy@2.1.1)(playwright@1.47.2)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.6.2))):
+  vitest-browser-react@0.0.1(@types/react-dom@18.3.1)(@types/react@18.3.11)(@vitest/browser@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@2.1.1):
     dependencies:
       '@vitest/browser': 2.1.1(@vitest/spy@2.1.1)(playwright@1.47.2)(typescript@5.6.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1)
       react: 18.3.1
