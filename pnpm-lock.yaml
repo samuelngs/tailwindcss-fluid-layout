@@ -29,7 +29,7 @@ importers:
         version: 2.1.1(@vitest/spy@2.1.1)(playwright@1.49.0)(typescript@5.7.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1)
       '@vitest/coverage-v8':
         specifier: ^2.1.1
-        version: 2.1.1(@vitest/browser@2.1.1)(vitest@2.1.1)
+        version: 2.1.1(@vitest/browser@2.1.1(@vitest/spy@2.1.1)(playwright@1.49.0)(typescript@5.7.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1))(vitest@2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.7.2)))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -61,8 +61,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.7.2))
       vitest-browser-react:
-        specifier: ^0.0.1
-        version: 0.0.1(@types/react-dom@18.3.1)(@types/react@18.3.11)(@vitest/browser@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@2.1.1)
+        specifier: ^0.0.4
+        version: 0.0.4(@types/react-dom@18.3.1)(@types/react@18.3.11)(@vitest/browser@2.1.1(@vitest/spy@2.1.1)(playwright@1.49.0)(typescript@5.7.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.7.2)))
 
 packages:
 
@@ -1584,16 +1584,16 @@ packages:
       terser:
         optional: true
 
-  vitest-browser-react@0.0.1:
-    resolution: {integrity: sha512-075hxhouuuMeCqHRyX4POzZWEDD3aPxFxDcwENN+T2ZlJ4lh5vUlgbkV4C4A0KZWinHb/Wsj3pYEJlDgIO23CQ==}
+  vitest-browser-react@0.0.4:
+    resolution: {integrity: sha512-4uK8zgo5eHlhrBVEPX8ejRt8Bn4gzV6OZFTPdb1en3FtgjEhhst400XkIQHUC875Q90rOO5Tc4zPpCl8YXvoxg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       '@types/react': '>18.0.0'
       '@types/react-dom': '>18.0.0'
-      '@vitest/browser': ^2.1.0-beta.4
+      '@vitest/browser': '>=2.1.0'
       react: '>18.0.0'
       react-dom: '>18.0.0'
-      vitest: ^2.1.0-beta.4
+      vitest: '>=2.1.0'
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2198,7 +2198,7 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/coverage-v8@2.1.1(@vitest/browser@2.1.1)(vitest@2.1.1)':
+  '@vitest/coverage-v8@2.1.1(@vitest/browser@2.1.1(@vitest/spy@2.1.1)(playwright@1.49.0)(typescript@5.7.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1))(vitest@2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.7.2)))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -3130,7 +3130,7 @@ snapshots:
       '@types/node': 22.7.2
       fsevents: 2.3.3
 
-  vitest-browser-react@0.0.1(@types/react-dom@18.3.1)(@types/react@18.3.11)(@vitest/browser@2.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@2.1.1):
+  vitest-browser-react@0.0.4(@types/react-dom@18.3.1)(@types/react@18.3.11)(@vitest/browser@2.1.1(@vitest/spy@2.1.1)(playwright@1.49.0)(typescript@5.7.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vitest@2.1.1(@types/node@22.7.2)(@vitest/browser@2.1.1)(msw@2.4.9(typescript@5.7.2))):
     dependencies:
       '@vitest/browser': 2.1.1(@vitest/spy@2.1.1)(playwright@1.49.0)(typescript@5.7.2)(vite@5.4.8(@types/node@22.7.2))(vitest@2.1.1)
       react: 18.3.1

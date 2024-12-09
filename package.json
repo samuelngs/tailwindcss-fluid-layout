@@ -39,7 +39,7 @@
     "typescript": "^5.7.2",
     "vite": "^5.4.8",
     "vitest": "^2.1.1",
-    "vitest-browser-react": "^0.0.1"
+    "vitest-browser-react": "^0.0.4"
   },
   "peerDependencies": {
     "tailwindcss": ">=3.4.6"
